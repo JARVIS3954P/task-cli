@@ -23,6 +23,8 @@ class Main{
         String action = args[0];
         System.out.print("\n");
         switch (action){
+
+            //Add a task
             case "add":
                 if(args.length!=2){
                     System.out.println("Expected command: add {task-description}");
@@ -31,7 +33,8 @@ class Main{
                 try{
                     taskManager.addTask(args[1]);
                 } catch (Exception e){
-                    System.out.println(e.getMessage());
+                    System.err.println(e);
+                    return;
                 }
                 break;
 

@@ -29,11 +29,11 @@ class TaskManager{
         return id;
     }
 
-    public void addTask(String description){
+    public void addTask(String description) throws IOException{
         int id = generateId();
         Task task = new Task(id, description);
         tasks.add(task);
-        // then update the persistent storage path with this tasks list
+        taskStorage.writeToFile(tasks.toString());
         System.out.println("Task "+ id +" added successfully");
     }
 

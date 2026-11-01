@@ -18,4 +18,8 @@ class TaskStorage {
         }
         System.out.println("Initialized tasks persistence");
     }
+
+    public void writeToFile(String content) throws IOException {
+        Files.writeString(path, content, StandardOpenOption.TRUNCATE_EXISTING);
+    }
 }
