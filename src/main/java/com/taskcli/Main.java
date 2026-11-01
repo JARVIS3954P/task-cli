@@ -1,10 +1,19 @@
 package com.taskcli;
 
+import java.io.IOException;
+
 class Main{
 
     public static void main(String[] args) {
 
-        TaskManager taskManager = new TaskManager();
+        TaskManager taskManager;
+
+        try{
+            taskManager = new TaskManager();
+        } catch (Exception e) {
+            System.err.println(e);
+            return;
+        }
 
         if(args.length==0){
             System.out.println("Please provide an action to perform...");

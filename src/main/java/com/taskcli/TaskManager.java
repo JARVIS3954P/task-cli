@@ -2,15 +2,16 @@ package com.taskcli;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.io.IOException;
 
 class TaskManager{
 
     List<Task> tasks;
+    TaskStorage taskStorage;
 
-    public TaskManager(){
+    public TaskManager() throws IOException{
         tasks = new ArrayList<Task>();
-        //check if JSON persistent exists, create if not
-        //fetch each task from it and populate the list tasks
+        taskStorage = new TaskStorage();
     }
 
     public int generateId(){
@@ -29,7 +30,6 @@ class TaskManager{
     }
 
     public void addTask(String description){
-
         int id = generateId();
         Task task = new Task(id, description);
         tasks.add(task);
