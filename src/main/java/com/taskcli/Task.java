@@ -2,61 +2,74 @@ package com.taskcli;
 
 import java.time.LocalDateTime;
 
-class Task{
+class Task {
     private final int id;
     private String description;
     private Status status;
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public int getId() {
-        return id;
+    Task(int id, String description) {
+        this(id, description, Status.TODO, LocalDateTime.now(), LocalDateTime.now());
     }
 
-    public String getDescription() {
-        return description;
-    }
+    Task(int id, String description, Status status,
+         LocalDateTime createdAt, LocalDateTime updatedAt) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("Task ID must be positive.");
+        }
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Task description cannot be empty.");
+        }
+        if (status == null || createdAt == null || updatedAt == null) {
+            throw new IllegalArgumentException("Task fields cannot be null.");
+        }
 
-    public void setDescription(String description) {
+        this.id = id;
         this.description = description;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    Task(int id, String description){
-        this.id = id;
-        this.description = description;
-        status = Status.TODO;
-        createdAt = LocalDateTime.now();
-        updatedAt = createdAt;
+    int getId() {
+        return id;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+    String getDescription() {
+        return description;
+    }
+
+    void setDescription(String description) {
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Task description cannot be empty.");
+        }
+        this.description = description;
+    }
+
+    Status getStatus() {
+        return status;
+    }
+
+    void setStatus(Status status) {
+        if (status == null) {
+            throw new IllegalArgumentException("Task status cannot be null.");
+        }
+        this.status = status;
+    }
+
+    LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    void setUpdatedAt(LocalDateTime updatedAt) {
+        if (updatedAt == null) {
+            throw new IllegalArgumentException("Updated timestamp cannot be null.");
+        }
+        this.updatedAt = updatedAt;
     }
 }
